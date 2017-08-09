@@ -32,7 +32,10 @@ public class Product implements Serializable {
     private String code;//商品编码
     private String model;//型号
     private Long stock;//库存
+    
     private Admin inputUser;//创建人
+    
+    private Shop shop;//所属店铺
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -131,8 +134,18 @@ public class Product implements Serializable {
     public void setSlavePic(List<Picture> slavePic) {
         this.slavePic = slavePic;
     }
+    
+    @ManyToOne
+    @JoinColumn
+    public Shop getShop() {
+		return shop;
+	}
 
-    @Override
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
+
+	@Override
     public String toString() {
         return "Product{" +
                 "id=" + id +

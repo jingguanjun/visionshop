@@ -25,7 +25,8 @@ import java.util.Locale;
 @Configuration
 @EnableSpringDataWebSupport
 public class WebConfig extends WebMvcConfigurerAdapter {
-
+	
+	//配置需要权限验证的接口
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new AuthenticationInterceptor()).addPathPatterns(

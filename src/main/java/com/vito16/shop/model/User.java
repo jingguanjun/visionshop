@@ -94,7 +94,11 @@ public class User implements Serializable {
 	 * 密码加密盐
 	 */
     private String slat;
-
+    /**
+     * 用户类型：0：普通用户，1：商家
+     */
+    private int role;
+    
 	public User() {
 	};
 
@@ -112,8 +116,7 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password="
-				+ password + "]";
+		return "User [id=" + id + ", username=" + username +"]";
 	}
 
 	@Id
@@ -126,7 +129,7 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	@Length(min = 2, max = 15)
+	@Length(min = 6, max = 32)
 	public String getUsername() {
 		return username;
 	}
@@ -136,7 +139,7 @@ public class User implements Serializable {
 	}
 
 	@NotEmpty
-	@Length(min = 6, max = 14)
+	@Length(min = 6, max = 32)
 	public String getPassword() {
 		return password;
 	}
@@ -241,4 +244,15 @@ public class User implements Serializable {
     public void setSlat(String slat) {
         this.slat = slat;
     }
+
+    @Column(name="role",columnDefinition="tinyint default 0")
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
+	}
+    
+    
 }

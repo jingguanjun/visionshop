@@ -1,25 +1,22 @@
 package com.vito16.shop.common;
 
-import com.vito16.shop.util.AdminUtil;
-import com.vito16.shop.util.UserUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * 登录校验
- * @author 木鱼 championjing@163.com
- * @version 2017/2/8
- */
-@Component
-public class AdminAuthenticationInterceptor extends HandlerInterceptorAdapter {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-    private Logger logger = LoggerFactory.getLogger(AdminAuthenticationInterceptor.class);
+import com.vito16.shop.util.AdminUtil;
+/**
+ * IP 记录 待完善
+ * @author champion
+ *
+ */
+public class IPLogger extends HandlerInterceptorAdapter {
+
+	private Logger logger = LoggerFactory.getLogger(AdminAuthenticationInterceptor.class);
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {

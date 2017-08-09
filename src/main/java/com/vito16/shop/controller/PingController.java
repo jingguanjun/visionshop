@@ -26,7 +26,7 @@ public class PingController {
 		
 		JSONObject json = new JSONObject();
 		json.put("version", "4.1");
-		ResponseUtil.result(resp, json);
+		ResponseUtil.result(resp, json.toString());
 	}
 
 }

@@ -50,15 +50,15 @@ public class ProductController {
     ProductService productService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public void listProduct(ModelAndView model,HttpServletRequest request, HttpServletResponse response) throws IOException {   	
+    public ModelAndView listProduct(ModelAndView model,HttpServletRequest request, HttpServletResponse response) throws IOException {   	
         Page<Product> page = new Page<Product>(request);
-        List<Product> list = productService.findProducts(page);
+       List<Product> list = productService.findProducts(page);
     
-        JSONObject json = (JSONObject) JSON.toJSON(list);
-        ResponseUtil.result(response, json);
-//        model.addObject("page", page);
-//        model.setViewName("product/productList");
-//        return model;
+       // String json = JSONObject.toJSON(list).toString();
+       // ResponseUtil.result(response, json);
+        model.addObject("page", page);
+        model.setViewName("product/productList");
+        return model;
     }
 
     @RequestMapping(value = "/{id}")

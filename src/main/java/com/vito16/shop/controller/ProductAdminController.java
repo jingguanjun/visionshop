@@ -60,7 +60,7 @@ public class ProductAdminController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String doNew(Product product, HttpSession session, @RequestParam("file") MultipartFile file) {
+    public String doNew(Product product, HttpSession session, @RequestParam(value="file",required=false) MultipartFile file) {
         if (file!=null&&!file.isEmpty()) {
             uploadImage(product, session, file);
         }
@@ -68,7 +68,7 @@ public class ProductAdminController {
         product.setInputUser(AdminUtil.getAdminFromSession(session));
         product.setCreateTime(new Date());
         productService.save(product);
-        return "redirect:/admin/product/index";
+        return "redirect:/admin/product";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
