@@ -37,7 +37,7 @@ import com.vito16.shop.util.Image;
 import com.vito16.shop.util.ResponseUtil;
 
 /**
- * @author Vito zhouwentao16@gmail.com
+ * @author championjing@163.com
  * @version 2013-7-17
  */
 @Controller
