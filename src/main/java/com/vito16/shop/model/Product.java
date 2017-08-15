@@ -1,6 +1,7 @@
 package com.vito16.shop.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer id;
     private String title;//名称
-    private Integer point;//价格
+    private BigDecimal point;//价格
     private Picture masterPic;//主图
     private List<Picture> slavePic;//关联图
     private String note;//描述
@@ -32,10 +33,7 @@ public class Product implements Serializable {
     private String code;//商品编码
     private String model;//型号
     private Long stock;//库存
-    
-    private Admin inputUser;//创建人
-    
-    private Shop shop;//所属店铺
+    private Shop shop;//所属商铺
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,11 +63,12 @@ public class Product implements Serializable {
         this.note = note;
     }
 
-    public Integer getPoint() {
+    @Column(precision=6,scale=2)
+    public BigDecimal getPoint() {
         return point;
     }
 
-    public void setPoint(Integer point) {
+    public void setPoint(BigDecimal point) {
         this.point = point;
     }
 
@@ -108,16 +107,6 @@ public class Product implements Serializable {
 
     @ManyToOne
     @JoinColumn
-    public Admin getInputUser() {
-        return inputUser;
-    }
-
-    public void setInputUser(Admin inputUser) {
-        this.inputUser = inputUser;
-    }
-
-    @ManyToOne
-    @JoinColumn
     public Picture getMasterPic() {
         return masterPic;
     }
@@ -134,9 +123,9 @@ public class Product implements Serializable {
     public void setSlavePic(List<Picture> slavePic) {
         this.slavePic = slavePic;
     }
-    
+      
     @ManyToOne
-    @JoinColumn
+	@JoinColumn(name="shop_id")
     public Shop getShop() {
 		return shop;
 	}
@@ -158,7 +147,6 @@ public class Product implements Serializable {
                 ", code='" + code + '\'' +
                 ", model='" + model + '\'' +
                 ", stock=" + stock +
-                ", inputUser=" + inputUser +
                 '}';
     }
 }

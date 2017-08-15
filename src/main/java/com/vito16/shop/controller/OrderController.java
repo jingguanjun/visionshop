@@ -92,11 +92,11 @@ public class OrderController {
         List<OrderItem> oiList = CartUtil.getOrderItemFromCart(session);
         BigDecimal totalSum = new BigDecimal("0");
         for (OrderItem oi : oiList) {
-            totalSum = totalSum.add(new BigDecimal(oi.getProduct().getPoint() * oi.getQuantity()));
+   //         totalSum = totalSum.add(new BigDecimal(oi.getProduct().getPoint() * oi.getQuantity()));
             oi.setOrder(order);
         }
-        order.setTotalPrice(totalSum.doubleValue());
-        order.setFinalPrice(totalSum.doubleValue());
+    //    order.setTotalPrice(totalSum.doubleValue());
+    //    order.setFinalPrice(totalSum.doubleValue());
         order.setOrderItems(oiList);
         order.setUser(UserUtil.getUserFromSession(session));
         //地址保存

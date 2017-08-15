@@ -6,6 +6,7 @@ import com.vito16.shop.model.Picture;
 import com.vito16.shop.model.Product;
 import com.vito16.shop.service.PictureService;
 import com.vito16.shop.service.ProductService;
+import com.vito16.shop.service.ShopService;
 import com.vito16.shop.util.AdminUtil;
 import com.vito16.shop.util.Image;
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -32,21 +34,20 @@ import java.util.Date;
  * @version 2017/6/1
  */
 @Controller
-@RequestMapping(value = "/admin/product")
-public class ProductAdminController {
+@RequestMapping(value = "/shop")
+public class ShopController {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProductAdminController.class);
-
-    @Autowired
-    ProductService productService;
+    private static final Logger logger = LoggerFactory.getLogger(ShopController.class);
 
     @Autowired
-    PictureService pictureService;
+    private ShopService shopService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView admin(ModelAndView model, HttpSession session, HttpServletRequest request) {
+
+    @RequestMapping(value="/{shopId}",method = RequestMethod.GET)    
+    public ModelAndView admin(ModelAndView model,@PathVariable Integer shopId , HttpSession session, 
+    		HttpServletRequest request,HttpServletResponse response) {
         Page<Product> page = new Page<Product>(request);
-        productService.findProducts(page);
+       // productService.findProducts(page);
         model.addObject("page", page);
         model.setViewName("admin/product/productAdmin");
         return model;
@@ -67,14 +68,14 @@ public class ProductAdminController {
         }
       //  product.setInputUser(AdminUtil.getAdminFromSession(session));
         product.setCreateTime(new Date());
-        productService.save(product);
+       // productService.save(product);
         return "redirect:/admin/product";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public ModelAndView edit(ModelAndView model, @PathVariable Integer id) {
-        Product product = productService.findById(id);
-        model.addObject("product", product);
+       // Product product = productService.findById(id);
+     //   model.addObject("product", product);
         model.setViewName("admin/product/productEdit");
         return model;
     }
@@ -85,7 +86,7 @@ public class ProductAdminController {
             uploadImage(product, session, file);
         }
       //  product.setInputUser(AdminUtil.getAdminFromSession(session));
-        productService.save(product);
+       // productService.save(product);
         model.setViewName("redirect:/admin/product");
         return model;
     }
@@ -133,7 +134,7 @@ public class ProductAdminController {
         picture.setUpdateTime(new Date());
         picture.setUrl("/upload/" + fileName);
        // picture.setUpdateAdmin(AdminUtil.getAdminFromSession(session));
-        pictureService.save(picture);
+      //  pictureService.save(picture);
         return picture;
     }
 }

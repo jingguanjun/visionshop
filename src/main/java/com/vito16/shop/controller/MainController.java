@@ -11,8 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.vito16.shop.service.ProductService;
 
 /**
- * @author championjing@163.com
- * @date 2016-7-8
+ * @author Vito zhouwentao16@gmail.com
+ * @date 2013-7-8
  */
 @Controller
 @RequestMapping("/")

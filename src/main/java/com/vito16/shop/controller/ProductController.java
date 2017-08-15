@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.vito16.shop.common.Constants;
 import com.vito16.shop.common.Page;
@@ -37,7 +36,7 @@ import com.vito16.shop.util.Image;
 import com.vito16.shop.util.ResponseUtil;
 
 /**
- * @author championjing@163.com
+ * @author Vito zhouwentao16@gmail.com
  * @version 2013-7-17
  */
 @Controller
@@ -50,15 +49,14 @@ public class ProductController {
     ProductService productService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView listProduct(ModelAndView model,HttpServletRequest request, HttpServletResponse response) throws IOException {   	
+    public void listProduct(ModelAndView model, HttpServletRequest request,HttpServletResponse response) throws IOException {
         Page<Product> page = new Page<Product>(request);
        List<Product> list = productService.findProducts(page);
-    
-       // String json = JSONObject.toJSON(list).toString();
-       // ResponseUtil.result(response, json);
-        model.addObject("page", page);
-        model.setViewName("product/productList");
-        return model;
+       String json = JSONObject.toJSON(list).toString();
+       ResponseUtil.result(response, json);
+//        model.addObject("page", page);
+//        model.setViewName("product/productList");
+//        return model;
     }
 
     @RequestMapping(value = "/{id}")

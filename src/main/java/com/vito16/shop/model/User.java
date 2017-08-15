@@ -4,14 +4,16 @@
 package com.vito16.shop.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.Transient;
 
 /**
@@ -29,79 +31,44 @@ public class User implements Serializable {
 	 * 数据序号
 	 */
 	private Integer id;
-
-	/**
-	 * 账号
-	 */
-	private String account;
-
-	/**
-	 * 用户名
-	 */
-	private String username;
-
-	/**
-	 * 账户余额
-	 */
-	private Long balance;
-
-	/**
-	 * 积分值
-	 */
-	private Long point;
-
-	/**
-	 * 手机号码
-	 */
-	private String phone;
-
-	/**
-	 * 座机电话
-	 */
-	private String telPhone;
-
-	/**
-	 * 地址
-	 */
-	private String address;
-
-	/**
-	 * 邮编
-	 */
-	private String zipCode;
-
-	/**
-	 * 备注
-	 */
-	private String remark;
-
-	/**
-	 * 密码信息(加密)
-	 */
-	private String password;
-
-	/**
-	 * 收货地址
-	 */
+	private String account;//账号
+	private String username;//用户名
+	private BigDecimal balance;//账户余额
+	private Long point;//积分值
+	private String phone;//手机号码
+	private String telPhone;//座机电话
+	private String address;//地址
+	private String zipCode;//邮编
+	private String remark;//备注
+	private String password;//密码信息(加密)
 	private List<UserAddress> addresses; // 关联收货地址
-
-	/**
-	 * 订单
-	 */
 	private List<Order> orders;// 订单
-
-	/**
-	 * 密码加密盐
-	 */
-    private String slat;
-    /**
-     * 用户类型：0：普通用户，1：商家
-     */
-    private int role;
+	private int role;//0:普通用户, 1:商家
+	private List<Shop> shops;//拥有的店铺
+	
+    private String slat;//密码加密盐
     
 	public User() {
 	};
 
+	@Column(length=1)
+	//@Value("0")
+	public int getRole() {
+		return role;
+	}
+	
+	public void setRole(int role) {
+		this.role = role;
+	}
+	
+	@OneToMany(mappedBy="user")
+	public List<Shop> getShops() {
+		return shops;
+	}
+	
+	public void setShops(List<Shop> shops) {
+		this.shops = shops;
+	}
 	/**
 	 * @param id
 	 * @param username
@@ -116,7 +83,8 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username +"]";
+		return "User [id=" + id + ", username=" + username + ", password="
+				+ password + "]";
 	}
 
 	@Id
@@ -129,7 +97,7 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	@Length(min = 6, max = 32)
+	@Length(min = 2, max = 15)
 	public String getUsername() {
 		return username;
 	}
@@ -139,7 +107,7 @@ public class User implements Serializable {
 	}
 
 	@NotEmpty
-	@Length(min = 6, max = 32)
+	@Length(min = 6, max = 14)
 	public String getPassword() {
 		return password;
 	}
@@ -229,11 +197,12 @@ public class User implements Serializable {
 		this.orders = orders;
 	}
 
-	public Long getBalance() {
+	@Column(precision=12,scale=2)
+	public BigDecimal getBalance() {
 		return balance;
 	}
 
-	public void setBalance(Long balance) {
+	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
 	}
 
@@ -244,15 +213,4 @@ public class User implements Serializable {
     public void setSlat(String slat) {
         this.slat = slat;
     }
-
-    @Column(name="role",columnDefinition="tinyint default 0")
-	public int getRole() {
-		return role;
-	}
-
-	public void setRole(int role) {
-		this.role = role;
-	}
-    
-    
 }

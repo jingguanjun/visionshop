@@ -28,7 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Date;
 
 /**
- * @author championjing@163.com
+ * @author Vito zhouwentao16@gmail.com
  * @date 2013-7-8
  */
 @Controller

@@ -25,31 +25,26 @@ import java.util.Locale;
 @Configuration
 @EnableSpringDataWebSupport
 public class WebConfig extends WebMvcConfigurerAdapter {
-	
-	//配置需要权限验证的接口
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new AuthenticationInterceptor()).addPathPatterns(
-                "/user/*","/order/*","/cart/*"
+                "/user/*","/order/*","/cart/*","/shop/*"
         ).excludePathPatterns("/user/login","/user/reg","/user/logout");
 
         registry.addInterceptor(new AdminAuthenticationInterceptor()).addPathPatterns(
                 "/admin/*","/*/admin/*"
         ).excludePathPatterns("/admin/login","/admin/logout");
-//        registry.addInterceptor(new AuthenticationInterceptor()).addPathPatterns(
-//                "/*"
-//        ).excludePathPatterns("/ping");
     }
 
     @Bean(name = "multipartResolver")
     public CommonsMultipartResolver multipartResolver() {
         CommonsMultipartResolver resolver=new CommonsMultipartResolver();
         resolver.setDefaultEncoding("utf-8");
-        resolver.setMaxUploadSize(10240000*12);
+        resolver.setMaxUploadSize(10240000);
         return resolver;
     }
 
-    
 /*
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

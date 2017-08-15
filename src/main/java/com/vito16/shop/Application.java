@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
- * @author championjing@163.com
+ * @author 木鱼 muyu@yiji.com
  * @version 2016/03/14
  */
 @SpringBootApplication

@@ -4,6 +4,7 @@
 package com.vito16.shop.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -38,8 +39,8 @@ public class Order implements Serializable {
     private Date shipTime;//发货时间
     private Date confirmTime;//确认收货时间
     private Integer status;//状态
-    private Double finalPrice;//实际成交价
-    private Double totalPrice;//总价
+    private BigDecimal finalPrice;//实际成交价
+    private BigDecimal totalPrice;//总价
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -122,21 +123,21 @@ public class Order implements Serializable {
         this.confirmTime = confirmTime;
     }
 
-    @NumberFormat(pattern = "0.00")
-    public Double getFinalPrice() {
+    @Column(precision=10,scale=2)
+    public BigDecimal getFinalPrice() {
         return finalPrice;
     }
 
-    public void setFinalPrice(Double finalPrice) {
+    public void setFinalPrice(BigDecimal finalPrice) {
         this.finalPrice = finalPrice;
     }
 
-    @NumberFormat(pattern = "0.00")
-    public Double getTotalPrice() {
+    @Column(precision=10,scale=2)
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Double totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 

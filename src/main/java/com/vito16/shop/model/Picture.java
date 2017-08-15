@@ -20,7 +20,7 @@ public class Picture {
     private String memo;
     private String url;
     private Date updateTime;
-    private Admin updateAdmin;
+    private User updateUser;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -66,11 +66,11 @@ public class Picture {
 
     @ManyToOne
     @JoinColumn
-    public Admin getUpdateAdmin() {
-        return updateAdmin;
+    public User getUpdateUser() {
+        return updateUser;
     }
 
-    public void setUpdateAdmin(Admin updateAdmin) {
-        this.updateAdmin = updateAdmin;
+    public void setUpdateUser(User updateUser) {
+        this.updateUser = updateUser;
     }
 }
