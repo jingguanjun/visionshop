@@ -3,6 +3,9 @@ package com.vito16.shop.repository;
 import java.util.List;
 
 import com.vito16.shop.model.Product;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -21,5 +24,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query("FROM Product p")
     List<Product> findPopProducts();
-
+    
+    Page<Product> findAllByShop_Id(Pageable pageable,Integer shop_id);
 }

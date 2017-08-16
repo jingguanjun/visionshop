@@ -67,4 +67,9 @@ public class ProductService {
         page.setTotalCount(productDao.count());
         return page.getResult();
     }
+    public List<Product> findByShopId(Page<Product> page,Integer shopId){
+    	page.setResult(productDao.findAllByShop_Id(page.getPageable(), shopId).getContent());
+        page.setTotalCount(productDao.count());
+    	return page.getResult();
+    }
 }

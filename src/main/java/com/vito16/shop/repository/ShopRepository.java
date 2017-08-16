@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
  * @date 2013-7-9
  */
 @Repository
-public interface ShopRepository extends JpaRepository<Product, Integer> {
+public interface ShopRepository extends JpaRepository<Shop, Integer> {
 
-    public Shop findById(Integer shopId);
 }
